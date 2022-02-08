@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{6d81a756-475a-4093-919e-3e9217f662ca}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)cp_converter.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\index_exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\key_exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\openssl_exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\win32_exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\not_implemented_exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\operation_canceled_exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\overflow_exception.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\keystone\keystone_handle.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\bignum.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\bio.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\bio_chain.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\rsa.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\unicorn\unicorn_handle.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\win32\map_view_ptr.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\cxx_dynamic_array_traits.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\cxx_object_traits.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\win32\file_handle.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\win32\generic_handle.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\win32\local_alloc.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_wrapper.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)rsa_cipher.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)exceptions\openssl_exception.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)exceptions\win32_exception.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)rsa_cipher.cpp" />
+  </ItemGroup>
+</Project>

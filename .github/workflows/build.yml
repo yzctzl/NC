@@ -1,0 +1,61 @@
+name: navicat-keygen builds
+on: [push]
+
+jobs:
+  navicat-keygen-x86:
+    runs-on: windows-latest
+    if: "startsWith(github.event.head_commit.message, '[build]')"
+    steps:
+      - name: Install dependencies
+        run: |
+          vcpkg install fmt:x86-windows-static
+          vcpkg install openssl:x86-windows-static
+          vcpkg install rapidjson:x86-windows-static
+          vcpkg install keystone:x86-windows-static
+          vcpkg install unicorn:x86-windows-static
+
+      - name: Clone source
+        uses: actions/checkout@v2
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build project
+        run: |
+          vcpkg integrate install
+          msbuild navicat-keygen.sln /p:Configuration=Release /p:Platform=x86
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: navicat-keygen-x86.zip
+          path: bin/x86-Release/*.exe
+
+  navicat-keygen-x64:
+    runs-on: windows-latest
+    if: "startsWith(github.event.head_commit.message, '[build]')"
+    steps:
+      - name: Install dependencies
+        run: |
+          vcpkg install fmt:x64-windows-static
+          vcpkg install openssl:x64-windows-static
+          vcpkg install rapidjson:x64-windows-static
+          vcpkg install keystone:x64-windows-static
+          vcpkg install unicorn:x64-windows-static
+
+      - name: Clone source
+        uses: actions/checkout@v2
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build project
+        run: |
+          vcpkg integrate install
+          msbuild navicat-keygen.sln /p:Configuration=Release /p:Platform=x64
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: navicat-keygen-x64.zip
+          path: bin/x64-Release/*.exe

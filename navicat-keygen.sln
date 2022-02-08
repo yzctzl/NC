@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "navicat-keygen", "navicat-keygen\navicat-keygen.vcxproj", "{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "navicat-patcher", "navicat-patcher\navicat-patcher.vcxproj", "{1B6920EB-E6ED-465F-9600-B5F816752375}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "common", "common\common.vcxitems", "{6D81A756-475A-4093-919E-3E9217F662CA}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		common\common.vcxitems*{1b6920eb-e6ed-465f-9600-b5f816752375}*SharedItemsImports = 4
+		common\common.vcxitems*{6d262af4-5dac-4f0c-b3d6-23c9cbea9756}*SharedItemsImports = 4
+		common\common.vcxitems*{6d81a756-475a-4093-919e-3e9217f662ca}*SharedItemsImports = 9
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Debug|x64.ActiveCfg = Debug|x64
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Debug|x64.Build.0 = Debug|x64
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Debug|x86.ActiveCfg = Debug|Win32
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Debug|x86.Build.0 = Debug|Win32
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Release|x64.ActiveCfg = Release|x64
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Release|x64.Build.0 = Release|x64
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Release|x86.ActiveCfg = Release|Win32
+		{6D262AF4-5DAC-4F0C-B3D6-23C9CBEA9756}.Release|x86.Build.0 = Release|Win32
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Debug|x64.ActiveCfg = Debug|x64
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Debug|x64.Build.0 = Debug|x64
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Debug|x86.ActiveCfg = Debug|Win32
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Debug|x86.Build.0 = Debug|Win32
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Release|x64.ActiveCfg = Release|x64
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Release|x64.Build.0 = Release|x64
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Release|x86.ActiveCfg = Release|Win32
+		{1B6920EB-E6ED-465F-9600-B5F816752375}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9382E280-F6E3-48E2-B3EF-1DB5BFF83DAE}
+	EndGlobalSection
+EndGlobal
