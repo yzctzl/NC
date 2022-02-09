@@ -49,6 +49,7 @@ namespace nkg {
             u8_organization = cp_converter<-1, CP_UTF8>::convert(organization);
         }
 
+        std::wcout << std::endl;
         std::wcout << L"[*] Input request code in Base64: (Input empty line to end)" << std::endl;
         while (true) {
             std::wstring s;
