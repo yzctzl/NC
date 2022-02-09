@@ -1,31 +1,35 @@
-# Navicat Keygen - 如何编译？
+# navicat-keygen for windows - 如何编译？
 
 ## 1. 前提条件
 
-1. 请确保你有 __Visual Studio 2019__ 或者更高版本。因为这是一个VS2019项目。
+1. 请确保你有 __Visual Studio 2022__ 或者更高版本。因为这是一个VS2022项目。
 
 2. 请确保你安装了 `vcpkg` 以及下面几个库：
 
-   * `capstone[x86]:x64-windows-static`
-   * `capstone[x86]:x86-windows-static`
-   * `keystone:x64-windows-static`
-   * `keystone:x86-windows-static`
-   * `openssl-windows:x64-windows-static`
-   * `openssl-windows:x86-windows-static`
+   * `fmt:x64-windows-static`
+   * `fmt:x86-windows-static`
+   * `openssl:x64-windows-static`
+   * `openssl:x86-windows-static`
    * `rapidjson:x64-windows-static`
    * `rapidjson:x86-windows-static`
+   * `keystone:x64-windows-static`
+   * `keystone:x86-windows-static`
+   * `unicorn:x64-windows-static`
+   * `unicorn:x86-windows-static`
 
    你可以通过下面的命令来安装它们：
 
    ```console
-   $ vcpkg install capstone[x86]:x64-windows-static
-   $ vcpkg install capstone[x86]:x86-windows-static
-   $ vcpkg install keystone:x64-windows-static
-   $ vcpkg install keystone:x86-windows-static
-   $ vcpkg install openssl-windows:x64-windows-static
-   $ vcpkg install openssl-windows:x86-windows-static
+   $ vcpkg install fmt:x64-windows-static
+   $ vcpkg install fmt:x86-windows-static
+   $ vcpkg install openssl:x64-windows-static
+   $ vcpkg install openssl:x86-windows-static
    $ vcpkg install rapidjson:x64-windows-static
    $ vcpkg install rapidjson:x86-windows-static
+   $ vcpkg install keystone:x64-windows-static
+   $ vcpkg install keystone:x86-windows-static
+   $ vcpkg install unicorn:x64-windows-static
+   $ vcpkg install unicorn:x86-windows-static
    ```
 
 3. 你的 `vcpkg` 已经和你的 __Visual Studio__ 集成了，即你曾成功运行了：
