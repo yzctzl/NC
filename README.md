@@ -24,7 +24,7 @@ see [here](doc/how-to-build.md).
 
 ## 3. How to use?
 
-see [here](doc/how-to-use.windows.md).
+see [here](doc/how-to-use.md).
 
 ## 4. Contributor
 

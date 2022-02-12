@@ -22,7 +22,7 @@ $ git clone -b windows --single-branch https://notabug.org/doublesine/navicat-ke
 
 ## 3. 如何使用这个注册机？
 
-见[这里](doc/how-to-use.windows.zh-CN.md)。
+见[这里](doc/how-to-use.zh-CN.md)。
 
 ## 4. 贡献者
 
