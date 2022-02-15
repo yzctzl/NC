@@ -67,13 +67,13 @@ namespace nkg {
             return *this;
         }
 
-        template<typename = std::enable_if_t<std::is_pointer_v<handle_t>>>
+        template<typename ptr_t = handle_t, std::enable_if_t<std::is_pointer_v<handle_t>, ptr_t> = nullptr>
         [[nodiscard]]
-        handle_t operator->() const noexcept {
+        ptr_t operator->() const noexcept {
             return m_handle;
         }
 
-        template<typename as_t, typename = std::enable_if_t<std::is_pointer_v<handle_t>>>
+        template<typename as_t>
         [[nodiscard]]
         as_t as() const noexcept {
             return reinterpret_cast<as_t>(m_handle);
@@ -165,13 +165,13 @@ namespace nkg {
             return *this;
         }
 
-        template<typename = std::enable_if_t<std::is_pointer_v<handle_t>>>
+        template<typename ptr_t = handle_t, std::enable_if_t<std::is_pointer_v<handle_t>, ptr_t> = nullptr>
         [[nodiscard]]
-        handle_t operator->() const noexcept {
+        ptr_t operator->() const noexcept {
             return m_handle;
         }
 
-        template<typename as_t, typename = std::enable_if_t<std::is_pointer_v<handle_t>>>
+        template<typename as_t>
         [[nodiscard]]
         as_t as() const noexcept {
             return reinterpret_cast<as_t>(m_handle);

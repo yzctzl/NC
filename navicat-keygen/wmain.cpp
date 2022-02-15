@@ -36,13 +36,13 @@ static void help() {
     _putws(L"");
     _putws(L"    <-bin|-text>       Specify \"-bin\" to generate \"license_file\" used by Navicat 11.");
     _putws(L"                       Specify \"-text\" to generate base64-encoded activation code.");
-    _putws(L"                       This parameter must be specified.");
+    _putws(L"                       This parameter is mandatory.");
     _putws(L"");
     _putws(L"    [-adv]             Enable advance mode.");
     _putws(L"                       This parameter is optional.");
     _putws(L"");
     _putws(L"    <RSA-2048 Private Key File>    A path to an RSA-2048 private key file.");
-    _putws(L"                                   This parameter must be specified.");
+    _putws(L"                                   This parameter is mandatory.");
     _putws(L"");
     _putws(L"Example:");
     _putws(L"    navicat-keygen.exe -text .\\RegPrivateKey.pem");
@@ -64,15 +64,13 @@ int wmain(int argc, wchar_t* argv[]) {
             return -1;
         }
 
-        if (argc == 4) {
-            if (_wcsicmp(argv[2], L"-adv") == 0) {
-                lpfnCollectInformation = nkg::CollectInformationAdvanced;
-            } else {
-                help();
-                return -1;
-            }
-        } else {
+        if (argc == 3) {
             lpfnCollectInformation = nkg::CollectInformationNormal;
+        } else if (argc == 4 && _wcsicmp(argv[2], L"-adv") == 0) {
+            lpfnCollectInformation = nkg::CollectInformationAdvanced;
+        } else {
+            help();
+            return -1;
         }
 
         try {
@@ -80,12 +78,11 @@ int wmain(int argc, wchar_t* argv[]) {
 
             cipher.import_private_key_file(nkg::cp_converter<-1, CP_UTF8>::convert(argv[argc - 1]));
             if (cipher.bits() != 2048) {
-                throw nkg::exception(NKG_CURRENT_SOURCE_FILE(), NKG_CURRENT_SOURCE_LINE(), u8"RSA key length mismatches.")
+                throw nkg::exception(NKG_CURRENT_SOURCE_FILE(), NKG_CURRENT_SOURCE_LINE(), u8"RSA key length != 2048 bits.")
                     .push_hint(u8"You must provide an RSA key whose modulus length is 2048 bits.");
             }
 
             auto sn_generator = lpfnCollectInformation();
-
             sn_generator.generate();
 
             _putws(L"[*] Serial number:");

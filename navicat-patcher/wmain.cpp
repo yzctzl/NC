@@ -34,21 +34,21 @@ void welcome() {
 
 
 void help() {
-    _putws(L"usage:");
+    _putws(L"Usage:");
     _putws(L"    navicat-patcher.exe [-dry-run] <Navicat Install Path> [RSA-2048 PEM File Path]");
     _putws(L"");
     _putws(L"    [-dry-run]                   Run patcher without applying any patches.");
     _putws(L"                                 This parameter is optional.");
     _putws(L"");
-    _putws(L"    <Navicat Install Path>       The folder path where Navicat is installed.");
-    _putws(L"                                 This parameter must be specified.");
+    _putws(L"    <Navicat Install Path>       Path to a directory where Navicat is installed.");
+    _putws(L"                                 This parameter is mandatory.");
     _putws(L"");
-    _putws(L"    [RSA-2048 PEM File Path]     The path to an RSA-2048 private key file.");
-    _putws(L"                                 This parameter is optional.");
+    _putws(L"    [RSA-2048 PEM File Path]     Path to an RSA-2048 private key file.");
     _putws(L"                                 If not specified, an RSA-2048 private key file");
-    _putws(L"                                 named \"RegPrivateKey.pem\" will be generated.");
+    _putws(L"                                     named \"RegPrivateKey.pem\" will be generated.");
+    _putws(L"                                 This parameter is optional.");
     _putws(L"");
-    _putws(L"example:");
+    _putws(L"Example:");
     _putws(L"    navicat-patcher.exe \"C:\\Program Files\\PremiumSoft\\Navicat Premium 12\"");
     _putws(L"");
 }
@@ -109,7 +109,12 @@ void load_rsa_privkey(nkg::rsa_cipher& cipher, std::filesystem::path& rsa_privke
         } while (solution0 && !solution0->check_rsa_privkey(cipher));   // re-generate RSA key if one of `check_rsa_privkey` returns false
     }
 
-    wprintf_s(L"[*] Your RSA private key:\n%s", nkg::cp_converter<CP_UTF8, -1>::convert(cipher.export_private_key_string()).c_str());
+    wprintf_s(L"[*] Your RSA private key:\n%s\n", nkg::cp_converter<CP_UTF8, -1>::convert(cipher.export_private_key_string()).c_str());
+}
+
+template<typename... args_t>
+bool all_patch_solutions_are_suppressed(args_t&&... args) {
+    return (!args.is_valid() && ...);
 }
 
 void detect_backup(const std::filesystem::path& file_path) {
@@ -174,9 +179,7 @@ int wmain(int argc, wchar_t* argv[]) {
 
             nkg::resource_wrapper solution0{ nkg::resource_traits::cxx_object_traits<nkg::patch_solution>{} };
 
-            //
-            // Open libcc.dll
-            //
+            // open libcc.dll
             libcc_handle.set(CreateFileW(libcc_filepath.native().c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL));
             if (libcc_handle.is_valid()) {
                 wprintf_s(L"[+] Try to open libcc.dll ... OK!\n");
@@ -206,67 +209,55 @@ int wmain(int argc, wchar_t* argv[]) {
 
             _putws(L"");
 
-            //
-            // find patch
-            //
-            if (!solution0->find_patch()) {
-                solution0.release();
+            // find patch and decide which solution will be applied
+            if (solution0.is_valid()) {
+                auto patch_found = solution0->find_patch();
+                _putws(L"");
+
+                if (!patch_found) {
+                    solution0.release();
+                }
             }
 
-            _putws(L"");
-
-            //
-            // decide which solutions will be applied
-            //
             select_patch_solutions(solution0);
 
-            if (!solution0.is_valid()) {
-                throw nkg::exception(NKG_CURRENT_SOURCE_FILE(), NKG_CURRENT_SOURCE_LINE(), u8"No patch solution is ready. Patch abort!")
+            if (all_patch_solutions_are_suppressed(solution0)) {
+                throw nkg::exception(NKG_CURRENT_SOURCE_FILE(), NKG_CURRENT_SOURCE_LINE(), u8"All patch solutions are suppressed. Patch abort!")
                     .push_hint(u8"Are you sure your navicat has not been patched/modified before?");
             }
 
-            //
             // load key
-            //
             load_rsa_privkey(cipher, rsa_privkey_filepath, solution0.get());
 
-            _putws(L"");
-
+            // apply patch solutions
             if (dry_run) {
                 _putws(L"*******************************************************");
                 _putws(L"*               DRY-RUN MODE ENABLE!                  *");
                 _putws(L"*             NO PATCH WILL BE APPLIED!               *");
                 _putws(L"*******************************************************");
             } else {
-                //
                 // save private key if not given
-                //
                 if (rsa_privkey_filepath.empty()) {
                     cipher.export_private_key_file(u8"RegPrivateKey.pem");
                 }
 
-                //
                 // detecting backups
-                //
                 if (solution0.is_valid()) {
                     detect_backup(libcc_filepath);
                 }
 
-                //
                 // make backup
-                //
                 if (solution0.is_valid()) {
                     make_backup(libcc_filepath);
                 }
 
-                //
                 // make patch
                 // no way to go back from here :-)
-                //
                 if (solution0.is_valid()) {
                     solution0->make_patch(cipher);
                 }
 
+                // print new key file path
                 if (rsa_privkey_filepath.empty()) {
                     wprintf_s(L"[*] New RSA-2048 private key has been saved to\n");
                     wprintf_s(L"    %s\n", (std::filesystem::current_path() / L"RegPrivateKey.pem").c_str());
@@ -274,7 +265,6 @@ int wmain(int argc, wchar_t* argv[]) {
                 }
 
                 _putws(L"");
-
                 _putws(L"*******************************************************");
                 _putws(L"*           PATCH HAS BEEN DONE SUCCESSFULLY!         *");
                 _putws(L"*                  HAVE FUN AND ENJOY~                *");
