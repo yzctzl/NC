@@ -1,0 +1,2 @@
+﻿  pch.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\atlmfc\include\afxver_.h(77,1): fatal error C1189: #error:  Please use the /MD switch for _AFXDLL builds

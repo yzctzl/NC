@@ -26,5 +26,4 @@ namespace nkg::exceptions {
             std::terminate();
         }
     }
-
 }
