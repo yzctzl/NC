@@ -1,3 +1,6 @@
+![screenshot](doc/screenshot.png)
+
+------------------
 # navicat-keygen
 
 [中文版README](README.zh-CN.md)
