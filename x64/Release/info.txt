@@ -1,2 +1,0 @@
-DataModeler;Premium;MySQL;PostgreSQL;Oracle;SQLServer;SQLite;MariaDB;MongoDB;ReportViewer
-English;Simplified Chinese;Traditional Chinese;Japanese;Polish;Spanish;French;German;Korean;Russian;Portuguese
