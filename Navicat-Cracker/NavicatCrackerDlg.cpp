@@ -77,42 +77,6 @@ void make_backup(const std::filesystem::path& file_path) {
 	}
 }
 
-// 用于应用程序“关于”菜单项的 CAboutDlg 对话框
-
-//class CAboutDlg : public CDialogEx
-//{
-//public:
-//	CAboutDlg();
-//
-//// 对话框数据
-//#ifdef AFX_DESIGN_TIME
-//	enum { IDD = IDD_ABOUTBOX };
-//#endif
-//
-//	protected:
-//	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
-//
-//// 实现
-//protected:
-//	DECLARE_MESSAGE_MAP()
-//};
-//
-//CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
-//{
-//}
-//
-//void CAboutDlg::DoDataExchange(CDataExchange* pDX)
-//{
-//	CDialogEx::DoDataExchange(pDX);
-//}
-//
-//BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-//END_MESSAGE_MAP()
-
-
-// CNavicatCrackerDlg 对话框
-
-
 
 CNavicatCrackerDlg::CNavicatCrackerDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_NavicatCracker_DIALOG, pParent)
@@ -214,27 +178,11 @@ BOOL CNavicatCrackerDlg::OnInitDialog()
 	bitmap_logo.Attach(png_image.Detach());
 	m_logo.SetBitmap(bitmap_logo);
 
-
+	m_hosts.SetCheck(TRUE);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
-//void CNavicatCrackerDlg::OnSysCommand(UINT nID, LPARAM lParam)
-//{
-//	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
-//	{
-//		CAboutDlg dlgAbout;
-//		dlgAbout.DoModal();
-//	}
-//	else
-//	{
-//		CDialogEx::OnSysCommand(nID, lParam);
-//	}
-//}
-
-// 如果向对话框添加最小化按钮，则需要下面的代码
-//  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，
-//  这将由框架自动完成。
 
 void CNavicatCrackerDlg::OnPaint()
 {
@@ -338,6 +286,11 @@ void CNavicatCrackerDlg::OnClickedPatchbtn()
 			CString cs_keypath{};
 			m_keyfile.GetWindowTextW(cs_keypath);
 			rsa_privkey_filepath = cs_keypath.GetString();
+			if (!PathFileExists(rsa_privkey_filepath.c_str())) {
+				m_checkkey.SetCheck(FALSE);
+				OnClickedCheckKey();
+				rsa_privkey_filepath.clear();
+			}
 		}
 		load_rsa_privkey(cipher, rsa_privkey_filepath, solution0.get());
 
