@@ -18,7 +18,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)exception.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\index_exception.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\key_exception.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\openssl_exception.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\win32_exception.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\not_implemented_exception.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)exceptions\operation_canceled_exception.hpp" />
@@ -27,6 +26,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\bignum.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\bio.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\bio_chain.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\decoder_ctx.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\encoder_ctx.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\evp_cipher_ctx.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\evp_pkey.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\evp_pkey_ctx.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\openssl\rsa.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\unicorn\unicorn_handle.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)resource_traits\win32\map_view_ptr.hpp" />
@@ -39,35 +43,17 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)rsa_cipher.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)exceptions\openssl_exception.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)exceptions\win32_exception.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)rsa_cipher.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreaded</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemGroup>
 </Project>

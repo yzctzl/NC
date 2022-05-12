@@ -2,7 +2,6 @@
 #include <exception>
 #include <string>
 #include <vector>
-#include <utility>
 
 namespace nkg {
 
@@ -14,6 +13,19 @@ namespace nkg {
         std::vector<std::string> m_hints;
 
     public:
+        [[noreturn]]
+        static void trap_then_terminate() {
+#if _MSC_VER
+            __debugbreak();
+#elif defined(__GNUC__) || defined(__GNUG__) || defined(__clang__)
+            __builtin_trap();
+
+#else
+#error "exception.hpp: unknown compiler is detected."
+#endif
+            std::terminate();
+        }
+
         exception(std::string_view file, int line, std::string_view message) noexcept :
             std::exception(),   // don't pass `char*` to `std::exception`, because it is not documented in c++ standard.
             m_source_line(line),
@@ -60,28 +72,12 @@ namespace nkg {
 
         [[nodiscard]]
         virtual intptr_t error_code() const noexcept {
-#if _MSC_VER
-            __debugbreak();
-            __assume(false);
-#elif defined(__GNUC__) || defined(__GNUG__) || defined(__clang__)
-            __builtin_trap();
-            __builtin_unreachable();
-#else
-#error "exception.hpp: unknown compiler is detected."
-#endif
+            trap_then_terminate();
         }
 
         [[nodiscard]]
         virtual const std::string& error_string() const noexcept {
-#if _MSC_VER
-            __debugbreak();
-            __assume(false);
-#elif defined(__GNUC__) || defined(__GNUG__) || defined(__clang__)
-            __builtin_trap();
-            __builtin_unreachable();
-#else
-#error "exception.hpp: unknown compiler is detected."
-#endif
+            trap_then_terminate();
         }
 
         virtual ~exception() = default;

@@ -25,7 +25,7 @@ namespace nkg {
 static void welcome() {
     _putws(L"***************************************************");
     _putws(L"*       navicat-keygen by @DoubleLabyrinth        *");
-    _putws(L"*                version: 16.0.7.0                *");
+    _putws(L"*                version: 16.0.7.0-1              *");
     _putws(L"***************************************************");
     _putws(L"");
 }

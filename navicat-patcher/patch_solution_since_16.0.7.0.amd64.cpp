@@ -429,9 +429,7 @@ namespace nkg {
             wprintf_s(L"[-] patch_solution_since<16, 0, 7, 0>: Code emulation failed.\n");
             wprintf_s(L"[-] patch_solution_since<16, 0, 7, 0>: This patch solution will be suppressed.\n");
             return false;
-        } catch (std::exception&) {
-            wprintf_s(L"STD EXCEPTION!");
-        } 
+        }
 
         wprintf_s(L"[*] patch_solution_since<16, 0, 7, 0>: m_va_iat_entry_malloc = 0x%016llx\n", m_va_iat_entry_malloc);
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <openssl/des.h>
+#include "exception.hpp"
 
 namespace nkg {
 
@@ -33,14 +33,20 @@ namespace nkg {
     };
 
     class navicat_serial_generator {
+    public:
+        class version_error;
+        class backend_error;
+
     private:
-        static inline const DES_cblock s_des_key0 = { 0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27 };
-        static inline const DES_cblock s_des_key1 = { 0xE9, 0x7F, 0xB0, 0x60, 0x77, 0x45, 0x90, 0xAE };
+        static inline const uint8_t s_des_key0[8] = {0x64, 0xAD, 0xF3, 0x2F, 0xAE, 0xF2, 0x1A, 0x27};
+        static inline const uint8_t s_des_key1[8] = {0xE9, 0x7F, 0xB0, 0x60, 0x77, 0x45, 0x90, 0xAE};
 
         uint8_t m_data[10];
-        DES_cblock m_des_key;
+        uint8_t m_des_key[8];
         std::string m_serial_number;
         std::string m_serial_number_formatted;
+
+        static char _replace_confusing_chars(char c) noexcept;
 
     public:
         navicat_serial_generator() noexcept;
@@ -60,6 +66,14 @@ namespace nkg {
 
         [[nodiscard]]
         const std::string& serial_number_formatted() const noexcept;
+    };
+
+    class navicat_serial_generator::version_error : public ::nkg::exception {
+        using ::nkg::exception::exception;
+    };
+
+    class navicat_serial_generator::backend_error : public ::nkg::exception {
+        using ::nkg::exception::exception;
     };
 
 }
